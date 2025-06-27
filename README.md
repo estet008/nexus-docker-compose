@@ -42,14 +42,16 @@ sudo apt install docker-compose-plugin -y
 ### ✅ Автоматичне встановлення в одну команду:
 
 ```bash
-git clone https://github.com/estet008/nexus-docker-compose.git && cd nexus-docker-compose && bash setup.sh
+bash <(curl -sSf https://raw.githubusercontent.com/estet008/nexus-docker-compose/main/bootstrap.sh)
 ```
 
 > Ця команда:
+> - встановлює всі залежності (Docker, плагін Compose)
 > - клонує репозиторій
 > - запитує NODE ID
 > - генерує `docker-compose.generated.yml` з урахуванням введеного NODE ID
 > - запускає контейнер через Docker Compose
+
 
 ## 🛠️ Керування Nexus Prover через Docker Compose
 
