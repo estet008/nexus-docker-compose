@@ -1,14 +1,28 @@
 #!/bin/bash
 
-echo -n "🔢 Введіть ваш NODE ID: "
-read NODE_ID
+set -e
+
+# ---------------------------
+# Nexus Prover setup script for Docker Compose
+# ---------------------------
+
+# 🔢 Запит NODE ID у користувача
+read -p "🔢 Введіть ваш NODE ID: " NODE_ID
 
 if [[ -z "$NODE_ID" ]]; then
   echo "❌ NODE ID не може бути порожнім"
   exit 1
 fi
 
-sed "s/REPLACE_ME/$NODE_ID/" docker-compose.yml > docker-compose.generated.yml
+# Перевірка наявності файлу шаблону
+if [[ ! -f docker-compose.yml ]]; then
+  echo "❌ Помилка: Файл docker-compose.yml не знайдено. Перевірте, чи ви в кореневій директорії репозиторію."
+  exit 1
+fi
+
+# Генерація фінального docker-compose файлу
+cp docker-compose.yml docker-compose.generated.yml
+sed -i "s|\${NODE_ID}|$NODE_ID|g" docker-compose.generated.yml
 
 echo "✅ Файл docker-compose.generated.yml створено з вашим NODE ID"
 echo "👉 Запустіть його командою:"
