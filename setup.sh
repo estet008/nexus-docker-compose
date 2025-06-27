@@ -24,6 +24,12 @@ fi
 cp docker-compose.yml docker-compose.generated.yml
 sed -i "s|\${NODE_ID}|$NODE_ID|g" docker-compose.generated.yml
 
+# Запуск контейнерів
 echo "✅ Файл docker-compose.generated.yml створено з вашим NODE ID"
-echo "👉 Запустіть його командою:"
-echo "   docker compose -f docker-compose.generated.yml up -d --build"
+echo "🚀 Запускаємо Docker Compose..."
+docker compose -f docker-compose.generated.yml up -d --build
+
+# Готово
+echo "✅ Nexus Prover успішно встановлено та запущено в Docker!"
+echo "💡 Перевірте статус контейнерів командою: docker compose ps"
+echo 
