@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  nexus-prover:
+    image: nexusprover:latest
+    container_name: nexus-instance
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ID=REPLACE_ME
+    volumes:
+      - prover-data:/home/prover/.nexus
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --cleanup --interval 300
+
+volumes:
+  prover-data:
