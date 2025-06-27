@@ -14,6 +14,15 @@ if [[ -z "$NODE_ID" ]]; then
   exit 1
 fi
 
+# 🔍 Перевірка доступності Docker Compose
+if ! command -v docker compose &> /dev/null && ! command -v docker-compose &> /dev/null; then
+  echo "❌ Docker Compose не встановлено."
+  echo "👉 Встановіть за допомогою однієї з опцій нижче:"
+  echo "   - curl -fsSL https://get.docker.com | sh"
+  echo "   - або скачайте docker-compose вручну з https://github.com/docker/compose/releases"
+  exit 1
+fi
+
 # Перевірка наявності файлу шаблону
 if [[ ! -f docker-compose.yml ]]; then
   echo "❌ Помилка: Файл docker-compose.yml не знайдено. Перевірте, чи ви в кореневій директорії репозиторію."
@@ -27,7 +36,7 @@ sed -i "s|\${NODE_ID}|$NODE_ID|g" docker-compose.generated.yml
 # Запуск контейнерів
 echo "✅ Файл docker-compose.generated.yml створено з вашим NODE ID"
 echo "🚀 Запускаємо Docker Compose..."
-docker compose -f docker-compose.generated.yml up -d --build
+docker compose -f docker-compose.generated.yml up -d --build || docker-compose -f docker-compose.generated.yml up -d --build
 
 # Готово
 echo "✅ Nexus Prover успішно встановлено та запущено в Docker!"
