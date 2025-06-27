@@ -9,7 +9,7 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - NODE_ID=REPLACE_ME
+      - NODE_ID=${NODE_ID}  # <- Скрипт замінює цю змінну
     volumes:
       - prover-data:/home/prover/.nexus
 
