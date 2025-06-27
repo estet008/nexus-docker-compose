@@ -24,6 +24,13 @@
 sudo apt update && sudo apt upgrade -y
 ```
 
+### 📦 Встановлення Docker та Docker Compose
+
+```bash
+sudo apt install docker.io docker-compose -y
+sudo systemctl enable --now docker
+```
+
 ## ⚙️ Встановлення Nexus Prover (через Docker Compose)
 
 ### ✅ Автоматичне встановлення в одну команду:
@@ -68,3 +75,7 @@ docker exec -it nexus-instance /home/prover/.nexus/bin/nexus-network --version
 ## ℹ️ Примітка
 
 Під час Testnet III очікується, що Nexus CLI може не запускатися автоматично або видавати повідомлення про "No such device or address" — це не помилка, а очікувана поведінка під час тестування мережі.
+
+---
+
+💙 Слава Україні!
