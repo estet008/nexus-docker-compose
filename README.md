@@ -31,37 +31,25 @@ sudo apt install docker.io -y
 sudo systemctl enable --now docker
 ```
 
-⚠️ Якщо система не має `docker compose`, встановіть вручну або використовуйте `docker-compose` як альтернативу.
+⚠️ Якщо система не має `docker compose`, встановіть плагін:
+
+```bash
+sudo apt install docker-compose-plugin -y
+```
 
 ## ⚙️ Встановлення Nexus Prover (через Docker Compose)
 
 ### ✅ Автоматичне встановлення в одну команду:
 
 ```bash
-bash <(curl -sSf https://raw.githubusercontent.com/estet008/nexus-docker-compose/main/setup.sh)
+git clone https://github.com/estet008/nexus-docker-compose.git && cd nexus-docker-compose && bash setup.sh
 ```
 
 > Ця команда:
+> - клонує репозиторій
 > - запитує NODE ID
-> - генерує `docker-compose.generated.yml`
-> - запускає контейнери автоматично
-
-### 📁 Структура репозиторію
-
-У вашому локальному репозиторії будуть наступні файли:
-
-- `setup.sh` — основний скрипт запуску
-- `Dockerfile` — опис створення Docker-образу Nexus CLI
-- `entrypoint.sh` — точка входу, яка запускає Nexus CLI у контейнері
-- `docker-compose.yml` — шаблон для створення фінального `docker-compose.generated.yml`
-
-```bash
-nexus-docker-compose/
-├── setup.sh
-├── Dockerfile
-├── entrypoint.sh
-├── docker-compose.yml
-```
+> - генерує `docker-compose.generated.yml` з урахуванням введеного NODE ID
+> - запускає контейнер через Docker Compose
 
 ## 🛠️ Керування Nexus Prover через Docker Compose
 
